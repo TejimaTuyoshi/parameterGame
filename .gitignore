@@ -1,1 +1,13 @@
 
+parameter/.vsconfig
+parameter/Assembly-CSharp.csproj
+parameter/Assembly-CSharp-Editor.csproj
+parameter/parameter.sln
+parameter/Assets/TutorialInfo.meta
+parameter/Assets/Settings/
+parameter/Assets/TutorialInfo/
+parameter/Library/
+parameter/Logs/
+parameter/ProjectSettings/
+parameter/Temp/
+parameter/UserSettings/
