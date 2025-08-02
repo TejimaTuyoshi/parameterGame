@@ -11,3 +11,5 @@ parameter/Logs/
 parameter/ProjectSettings/
 parameter/Temp/
 parameter/UserSettings/
+parameter/.vs/
+parameter/obj/
