@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
@@ -20,9 +21,17 @@ public class player : MonoBehaviour
     [SerializeField] int _damageBonusNum = 0;//補正時の計算を基にする際の数値
     [SerializeField] int _damageBonus = 0;//攻撃時に追加される数値。
     [SerializeField] int _hp = 0;
+
+    //テキストにてステータスを出力
+    [SerializeField] Text states;
     void Start()
     {
-        
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        if (player.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -30,6 +39,7 @@ public class player : MonoBehaviour
         _lucky = _power * 5 ;
         _damageBonusNum = _strength + _size ;
         _hp = (_constitution + _size) / 2 ;
+        StatesText();
     }
 
     public void StartStatus()
@@ -42,9 +52,26 @@ public class player : MonoBehaviour
         _intelligence = _random.Next(02, 07) + 6;
         _power = _random.Next(03, 19);
         _education = _random.Next(03, 19) + 6;
+        DamageBonusNumber();
     }
 
     public void Dice(){ Debug.Log(_random.Next(01, 101)); }
+
+    void StatesText()
+    {
+        states.text =
+     ($"STR:{_strength}\n" +
+     $"CON:{_constitution}\n" +
+     $"SIZE:{_size}\n" +
+     $"DEX:{_dexterity}\n" +
+     $"APP:{_appearance}\n" +
+     $"INT:{_intelligence}\n" +
+     $"POW:{_power}\n" +
+     $"EDU:{_education}\n" +
+     $"LUK:{_lucky}\n" +
+     $"DB:{_damageBonus}\n" +
+     $"HP:{_hp}");
+    }
 
     void DamageBonusNumber()//damageボーナスの補正を計算する際の関数
     {//攻撃時に毎回数値として出す予定
