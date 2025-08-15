@@ -22,8 +22,12 @@ public class player : MonoBehaviour
     [SerializeField] int _damageBonus = 0;//攻撃時に追加される数値。
     [SerializeField] int _hp = 0;
 
-    //テキストにてステータスを出力
-    [SerializeField] Text states;
+
+    [SerializeField] Text statesText;//テキストにてステータスを出力
+
+    [SerializeField] Text checkText;//テキストにて判定を出力
+
+
     void Start()
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
@@ -55,11 +59,41 @@ public class player : MonoBehaviour
         DamageBonusNumber();
     }
 
-    public void Dice(){ Debug.Log(_random.Next(01, 101)); }
+    void MyDice(){ _myDice = _random.Next(0, 101); }
+
+    void Success(int stateNum) //判定成功時の処理
+    {
+        if (stateNum == 1) //STR成功時
+        {
+            Debug.Log($"{_myDice}:成功");
+            checkText.text = ($"{_myDice}:成功!");
+        }
+    }
+
+    void Failed(int stateNum)//判定失敗時の処理
+    {
+        if (stateNum == 1) //STR失敗時
+        {
+            Debug.Log($"{_myDice}:失敗");
+            checkText.text = ($"{_myDice}:失敗...");
+        }
+    }
+
+    void Check(int stateNum)//技能判定を行い処理をそれぞれ行う。
+    {
+        if(stateNum == 1) 
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(1); }
+            else { Failed(1); }
+        }
+    }
+
+    public void CheckSTR() { Check(1); } //STRで判定を行う場合
 
     void StatesText()
     {
-        states.text =
+        statesText.text =
      ($"STR:{_strength}\n" +
      $"CON:{_constitution}\n" +
      $"SIZE:{_size}\n" +
