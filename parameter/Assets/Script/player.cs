@@ -16,9 +16,19 @@ public class player : MonoBehaviour
     [SerializeField] int _power = 0;//精神力
     [SerializeField] int _education = 0;//教育
 
+    //個々の技能での成功カウント
+    int _strengthCount = 0;//筋力
+    int _constitutionCount = 0;//体力
+    int _sizeCount = 0;//体格
+    int _dexterityCount = 0;//敏捷性
+    int _appearanceCount = 0;//外見
+    int _intelligenceCount = 0;//知性
+    int _powerCount = 0;//精神力
+    int _educationCount = 0;//教育
+
     //計算によって出すパラメータ
     [SerializeField] int _lucky = 0;//幸運
-    [SerializeField] int _damageBonusNum = 0;//補正時の計算を基にする際の数値
+    int _damageBonusNum = 0;//補正時の計算を基にする際の数値
     [SerializeField] int _damageBonus = 0;//攻撃時に追加される数値。
     [SerializeField] int _hp = 0;
 
@@ -63,33 +73,149 @@ public class player : MonoBehaviour
 
     void Success(int stateNum) //判定成功時の処理
     {
+        Debug.Log($"{_myDice}:成功");
+        checkText.text = ($"{_myDice}:成功!");
         if (stateNum == 1) //STR成功時
         {
-            Debug.Log($"{_myDice}:成功");
-            checkText.text = ($"{_myDice}:成功!");
+            _strengthCount++;
+            if (_strengthCount > 2)
+            {
+                _strength++;
+                _strengthCount = 0;
+            }
+        }
+        if (stateNum == 2) //CON成功時
+        {
+            _constitutionCount++;
+            if (_constitutionCount > 2)
+            {
+                _constitution++;
+                _constitutionCount = 0;
+            }
+        }
+        if (stateNum == 3) //SIZ成功時
+        {
+            _sizeCount++;
+            if (_sizeCount > 2)
+            {
+                _size++;
+                _sizeCount = 0;
+            }
+        }
+        if (stateNum == 4) //DEX成功時
+        {
+            _dexterityCount++;
+            if (_dexterityCount > 2)
+            {
+                _dexterity++;
+                _dexterityCount = 0;
+            }
+        }
+        if (stateNum == 5) //APP成功時
+        {
+            _appearanceCount++;
+            if (_appearanceCount > 2)
+            {
+                _appearance++;
+                _appearanceCount = 0;
+            }
+        }
+        if (stateNum == 6) //INT成功時
+        {
+            _intelligenceCount++;
+            if (_intelligenceCount > 2)
+            {
+                _intelligence++;
+                _intelligenceCount = 0;
+            }
+        }
+        if (stateNum == 7) //POW成功時
+        {
+            _powerCount++;
+            if (_powerCount > 2)
+            {
+                _power++;
+                _powerCount = 0;
+            }
+        }
+        if (stateNum == 8) //EDU成功時
+        {
+            _educationCount++;
+            if (_educationCount > 2)
+            {
+                _education++;
+                _educationCount = 0;
+            }
         }
     }
 
-    void Failed(int stateNum)//判定失敗時の処理
+    void Failed()//判定失敗時の処理
     {
-        if (stateNum == 1) //STR失敗時
-        {
-            Debug.Log($"{_myDice}:失敗");
-            checkText.text = ($"{_myDice}:失敗...");
-        }
+        Debug.Log($"{_myDice}:失敗");
+        checkText.text = ($"{_myDice}:失敗...");
+        _hp -= 1;
     }
 
     void Check(int stateNum)//技能判定を行い処理をそれぞれ行う。
     {
-        if(stateNum == 1) 
+        if(stateNum == 1) //STRの判定時
         {
             MyDice();
             if (_myDice <= _strength * 5) { Success(1); }
-            else { Failed(1); }
+            else { Failed(); }
+        }
+        if (stateNum == 2) //CONの判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(2); }
+            else { Failed(); }
+        }
+        if (stateNum == 3) //SIZ判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(3); }
+            else { Failed(); }
+        }
+        if (stateNum == 4) //DEX判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(4); }
+            else { Failed(); }
+        }
+        if (stateNum == 5) //APP判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(5); }
+            else { Failed(); }
+        }
+        if (stateNum == 6) //INT判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(6); }
+            else { Failed(); }
+        }
+        if (stateNum == 7) //POW判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(7); }
+            else { Failed(); }
+        }
+        if (stateNum == 8) //EDU判定時
+        {
+            MyDice();
+            if (_myDice <= _strength * 5) { Success(8); }
+            else { Failed(); }
         }
     }
 
     public void CheckSTR() { Check(1); } //STRで判定を行う場合
+    public void CheckCON() { Check(2); } //CONで判定を行う場合
+    public void CheckSIZ() { Check(3); } //SIZで判定を行う場合
+    public void CheckDEX() { Check(4); } //DEXで判定を行う場合
+    public void CheckAPP() { Check(5); } //APPで判定を行う場合
+    public void CheckINT() { Check(6); } //INTで判定を行う場合
+    public void CheckPOW() { Check(7); } //POWで判定を行う場合
+    public void CheckEDU() { Check(8); } //EDUで判定を行う場合
 
     void StatesText()
     {
