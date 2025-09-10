@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class player : MonoBehaviour
+public class player : GameJudger
 {
     System.Random _random = new System.Random();
     int _myDice = 0;//成功か失敗かを判定するための数値
@@ -32,8 +32,7 @@ public class player : MonoBehaviour
     [SerializeField] Text checkText;//テキストにて判定を出力
 
     [SerializeField] SuccessCount successCount;
-    [SerializeField] GameObject retryPanel;
-    void Start()
+     void Start()
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         if (player.Length > 1)
@@ -43,9 +42,10 @@ public class player : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Update()
+     void Update()
     {
-        if (_hp == 0) { retryPanel.SetActive(true); }
+
+        if (_hp == 0) { Dead(); }
 
         StatesText();
     }
@@ -208,6 +208,30 @@ public class player : MonoBehaviour
             _education -= 1;
         }
         StatesCheck();
+    }
+
+    void SanityCheck(int shock)
+    {
+        if(shock == 0)
+        {
+            if(_myDice <= _sanity) { _sanity -= 0; }
+            else { _sanity -= 1; }
+        }
+        else if(shock == 1)
+        {
+            if (_myDice <= _sanity) { _sanity -= 1; }
+            else { _sanity -= _random.Next(1,4); }
+        }
+        else if(shock == 2)
+        {
+            if (_myDice <= _sanity) { _sanity -= _random.Next(1, 4); }
+            else { _sanity -= _random.Next(1, 7); }
+        }
+        else
+        {
+            if (_myDice <= _sanity) { _sanity -= _random.Next(1, 7); }
+            else { _sanity -= _random.Next(1, 11); }
+        }
     }
 
     void Check(int stateNum)//技能判定を行い処理をそれぞれ行う。

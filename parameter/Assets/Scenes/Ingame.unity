@@ -613,6 +613,50 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &521823936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 521823937}
+  - component: {fileID: 521823938}
+  m_Layer: 0
+  m_Name: System
+  m_TagString: System
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &521823937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521823936}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 767.72797, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &521823938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521823936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c58ea983f256e742aa86599275c945c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &590703849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,7 +2475,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 1900963294}
-  clearPanel: {fileID: 193770939}
   _count: 0
   _clearNum: 10
 --- !u!1 &1971573130
@@ -2672,6 +2715,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1555820517}
     - target: {fileID: 1677313700400723489, guid: e2305c7a6e0503044845972f282bcbf8, type: 3}
+      propertyPath: clearPanel
+      value: 
+      objectReference: {fileID: 193770939}
+    - target: {fileID: 1677313700400723489, guid: e2305c7a6e0503044845972f282bcbf8, type: 3}
       propertyPath: retryPanel
       value: 
       objectReference: {fileID: 590703849}
@@ -2745,3 +2792,4 @@ SceneRoots:
   - {fileID: 6828742204647004867}
   - {fileID: 975307354}
   - {fileID: 820267865}
+  - {fileID: 521823937}
